@@ -4,7 +4,6 @@ import rospy
 from geometry_msgs.msg import Point, Twist
 from sensor_msgs.msg import LaserScan, Imu, NavSatFix, Range
 from tf.transformations import euler_from_quaternion
-from pyproj import Geod
 import numpy as np
 import math
 import time
@@ -22,7 +21,6 @@ class Steer:
         speed = Twist()
 
     def waypoint_callback(data):
-
         pass
 
     def imu_callback(pose):

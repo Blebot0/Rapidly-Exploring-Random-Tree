@@ -7,6 +7,7 @@ from geometry_msgs.msg import *
 from std_msgs.msg import String
 from gazebo_msgs.srv import SpawnModel
 import random
+from rrt_simulation.msg
 from sensor_msgs.msg import NavSatFix
 import math
 flag = 0
@@ -45,10 +46,10 @@ class RRT_Planner():
         
         self.final_path = []
         rospy.wait_for_service("gazebo/spawn_urdf_model")
-        self.waypoint_pub = rospy.Publisher("/waypoints", String, queue_size=5)
+        self.waypoint_pub = rospy.Publisher("/waypoints", Waypoint, queue_size=5)
         self.spawn_model = rospy.ServiceProxy("gazebo/spawn_urdf_model", SpawnModel)
-
-        
+        self.waypoint_obj = Waypoint()
+        self.final_path_list = []
         self.num = 1
         self.num_path = 1
     
@@ -95,6 +96,10 @@ class RRT_Planner():
                 for i in self.final_path:
                     self.path_spawner(i.x, i.y)
                     print(i.x, i.y)
+                    self.waypoint_obj.x_waypoint = i.x
+                    self.waypoint_obj.y_waypoint = i.y
+                    self.waypoint_pub(self.waypoint_obj)
+
                 return
 
     def final_course(self):
@@ -116,7 +121,8 @@ class RRT_Planner():
                     new_node.y -= self.length * math.sin(node.theta)
                     temp_node = self.Node(new_node.x, new_node.y)
                     if self.obstacle_collision_detector(new_node):
-                        temp_node.y -= 4 * math.sin(node.theta) 
+                        temp_node.y -= 4 * math.sin(node.theta)
+                        temp_node.x += 2 * math.cos(node.theta)
                         
                     new_node.path.append(temp_node)
                 path1.extend(new_node.path)
@@ -126,9 +132,17 @@ class RRT_Planner():
                 path = path1
                 for i in path:
                     print(i.x, i.y)
+
+        path = path[:path.index(self.end_point) + 1]
         return path
             
+    def path_to_string(self):
+        for i in self.final_path:
+            self.final_path_list.append(["{}".format(i.x),"{}".format(i.y) ])
 
+        str = ",".join(self.final_path_list)
+
+        return str
     def obstacle_collision_detector(self, node):
         for center_x, center_y, radius in self.obstacle_loc:
             if (node.x - center_x) ** 2 + (node.y - center_y) ** 2 < radius ** 2:
@@ -204,7 +218,7 @@ if __name__ == "__main__":
     obstacle_y = RRT_Planner.long_to_y(8.8999880161)
     obstacle_loc = [(obstacle_x, obstacle_y, 2)]
     max_iter = 300
-    obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2, waypoint= 1, goal_radius=1.5)
+    obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 1, waypoint= 1, goal_radius=1.5)
     
     while not rospy.is_shutdown() and count < max_iter:
         obj.rtt_planner()

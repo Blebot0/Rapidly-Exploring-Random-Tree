@@ -1,0 +1,2 @@
+int32 x_waypoint
+int32 y_waypoint
