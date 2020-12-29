@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot>
+<gazebo>
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <updateRate>100.0</updateRate>
+    <robotNamespace>/</robotNamespace>
+    <leftFrontJoint>left_wheel_fhinge</leftFrontJoint>
+    <rightFrontJoint>right_wheel_fhinge</rightFrontJoint>
+    <leftRearJoint>left_wheel_hinge</leftRearJoint>
+    <rightRearJoint>right_wheel_hinge</rightRearJoint>
+    <wheelSeparation>0.1</wheelSeparation>
+    <wheelDiameter>0.2</wheelDiameter>
+    <commandTopic>cmd_vel</commandTopic>
+    <robotBaseFrame>chassis</robotBaseFrame>
+    <torque>20</torque>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <topicName>cmd_vel</topicName>
+    <broadcastTF>false</broadcastTF>
+    <covariance_x>0</covariance_x>
+    <covariance_y>0</covariance_y>
+    <covariance_yaw>0</covariance_yaw>
+  </plugin>
+
+
+</gazebo>
+
+<gazebo>
+  <plugin name="imu" filename="libhector_gazebo_ros_imu.so">
+  <serviceName>/imu/calibrate</serviceName>
+  <updateRate>200.0</updateRate>
+  <bodyName>chassis</bodyName>
+  <topicName>imu</topicName>
+  <rpyOffset>0 0 0</rpyOffset>
+  <xyzOffset>0 0 0</xyzOffset>
+  <gaussianNoise>0.00000001</gaussianNoise>
+  <accelDrift>0.00000001 0.00000001 0.00000001</accelDrift>
+  <accelDriftFrequency>0.00000001 0.00000001 0.00000001</accelDriftFrequency>
+  <accelGaussianNoise>0.00000001 0.00000001 0.00000001</accelGaussianNoise>
+  <rateDrift>0.0 0.0 0.0</rateDrift>
+  <rateDriftFrequency>0.0 0.0 0.0</rateDriftFrequency>
+  <rateGaussianNoise>0.0 0.0 0.0</rateGaussianNoise>
+  <headingDrift>0.0 0.0 0.0</headingDrift>
+  <headingDriftFrequency>0.0 0.0 0.0</headingDriftFrequency>
+  <headingGaussianNoise>0.0 0.0 0.0</headingGaussianNoise>
+</plugin>
+</gazebo>
+
+<gazebo reference="chassis">
+      <material>Gazebo/Black</material>
+</gazebo>
+
+
+  <gazebo>
+    <plugin name="novatel_gps_sim" filename="libhector_gazebo_ros_gps.so">
+      <alwaysOn>1</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>chassis</bodyName>
+      <topicName>fix</topicName>
+      <velocityTopicName>fix_velocity</velocityTopicName>
+      <drift>0.0 0.0 0.0</drift>
+      <gaussianNoise>0.000 0.000 0.000</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.000 0.000 0.000</velocityGaussianNoise>
+    </plugin>
+  </gazebo>
+  
+
+</robot>
