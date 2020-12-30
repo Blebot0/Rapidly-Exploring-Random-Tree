@@ -148,14 +148,26 @@ class RRT_Planner():
 
    
     def random_node_generator(self):
-        if random.randrange(0, 100) >= self.goal_prob:
-            
-            x_node = random.uniform(self.min_dis, self.max_dis)
-            y_node = random.uniform(self.min_dis, self.max_dis)
-            
-            self.node_spawner(locx=x_node, locy= y_node)
-        # write the else part
-            return Node(x_node, y_node)
+        random_num = random.randrange(0, 100)
+        x_node = 0.
+        y_node = 0.
+        if random_num>=0 and random_num < 35:
+        
+            x_node = random.uniform(self.min_dis * 1 / 3, self.max_dis * 1 / 3)
+            y_node = random.uniform(self.min_dis * 1 / 3, self.max_dis * 1 / 3)
+    
+        elif random_num>=35 and random_num < 70:
+                    
+            x_node = random.uniform(self.min_dis * 2 / 3, self.max_dis * 2 / 3)
+            y_node = random.uniform(self.min_dis * 2 / 3, self.max_dis * 2 / 3)
+    
+        elif random_num>=70 and random_num <= 100:
+                    
+            x_node = random.uniform(self.min_dis * 1 , self.max_dis * 1 )
+            y_node = random.uniform(self.min_dis * 1 , self.max_dis * 1 )
+        
+        self.node_spawner(locx=x_node, locy= y_node)
+        return Node(x_node, y_node)
     
     
     @staticmethod
@@ -204,8 +216,8 @@ if __name__ == "__main__":
     obstacle_x = RRT_Planner.lat_to_x(49.900073224)
     obstacle_y = RRT_Planner.long_to_y(8.8999880161)
     obstacle_loc = [(obstacle_x, obstacle_y, 2)]
-    max_iter = 300
-    obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2., goal_radius=3)
+    max_iter = 500
+    obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2., goal_radius=1.5)
     
     while not rospy.is_shutdown() and count < max_iter:
         obj.rtt_planner()
