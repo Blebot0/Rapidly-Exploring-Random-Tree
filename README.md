@@ -50,7 +50,7 @@ source devel/setup.bash
 ```
 This would setup the whole directory. You can also add the source line in your .bashrc if you don't want to repeat this process.
 
-Now Navigate to the rrt_bot_main.py and change the path of the URDFs to the path in your workspace.
+Now Navigate to the rrt_bot_optimised.py and change the path of the URDFs to the path in your workspace.
 These URDFs need an absolute path so please change it accordingly.
 
 ![picture](src/readme_assets/rrt_5.png)
@@ -68,7 +68,7 @@ in your terminal
 
 Most of the parameters of the algorithm cannot be changed however a new goal could be set as well as new obstacles.
 
-In line 220 of the rrt_bot_main.py, change end_point to fix new goal and change the obstacle_loc list to add more obstacles.
+In line 232 of the rrt_bot_optimised.py, change end_point to fix new goal and change the obstacle_loc list to add more obstacles.
 ```
 obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, 
 
@@ -79,7 +79,7 @@ obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2.
 ```
 # Changes that I am working on
 
-* Implementing in C++ to improve the efficiency of the Planner
+* Implementing the algorithm in C++ to improve the efficiency of the Planner
 * Writing Comments on the python code to make it more understandable
 
 
