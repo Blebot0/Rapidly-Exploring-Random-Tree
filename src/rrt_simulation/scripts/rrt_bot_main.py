@@ -216,7 +216,7 @@ if __name__ == "__main__":
     obstacle_x = RRT_Planner.lat_to_x(49.900073224)
     obstacle_y = RRT_Planner.long_to_y(8.8999880161)
     # Obstacle location (x, y, radius)
-    obstacle_loc = [(obstacle_x, obstacle_y, 2)]
+    obstacle_loc = [(obstacle_x, obstacle_y, 1)]
     max_iter = 500
     obj = RRT_Planner(goal_prob= 0, min_dis= -10, max_dis=10, obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2., goal_radius=2)
     

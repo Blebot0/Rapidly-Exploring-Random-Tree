@@ -24,6 +24,8 @@
   </include>
 
 
+  <node name="rrt_planner" pkg="rrt_simulation" type="rrt_bot_optimised.py" output="screen"/>
+  <node name="rrt_steer" pkg="rrt_simulation" type="steer_main.py" output="screen"/>
 
   <!-- SPAWN ROBOT -->
   <!-- <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
