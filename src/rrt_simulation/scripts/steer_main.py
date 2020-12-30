@@ -64,27 +64,25 @@ class Steer:
             dist, theta = self.calculate_parmaters()
             print("Going to Waypoint Number: {}".format(self.waypoint_num + 1))
             while True:
-                print(self.waypoints[self.waypoint_num])
                 angle_diff = self.yaw - theta
-                print(angle_diff)
 
                 if angle_diff>1:
                     if angle_diff<180:
                         self.speed.linear.x = 0
-                        self.speed.angular.z=-1.
+                        self.speed.angular.z=-1.2
                     elif angle_diff>180:
                         self.speed.linear.x = 0
-                        self.speed.angular.z=1.
+                        self.speed.angular.z=1.2
                     self.speed_pub.publish(self.speed)
 
                 elif angle_diff<-1:
                     angle_diff = abs(angle_diff)
                     if angle_diff<180:
                         self.speed.linear.x = 0
-                        self.speed.angular.z = 1.
+                        self.speed.angular.z = 1.2
                     elif angle_diff>180:
                         self.speed.linear.x = 0
-                        self.speed.angular.z = -1.
+                        self.speed.angular.z = -1.2
                     self.speed_pub.publish(self.speed)
                 
                 if angle_diff < 1 and angle_diff >-1:
@@ -94,13 +92,10 @@ class Steer:
                         break
                     elif dist >=0.1:
                         self.speed.angular.z = 0
-                        self.speed.linear.x = 0.5
+                        self.speed.linear.x = 0.8
                         self.speed_pub.publish(self.speed)
 
-
-
         else:
-            print("REACHED FINAL POSITION")
             self.speed.angular.z = 0
             self.speed.linear.x = 0
             self.speed_pub.publish(self.speed)

@@ -80,6 +80,7 @@ obstacle_loc=obstacle_loc, start_point=[0, 0], end_point= [8, 8], length= 2.
 # Changes that I am working on
 
 * Implementing in C++ to improve the efficiency of the Planner
+* Writing Comments on the python code to make it more understandable
 
 
 # Improvements that could be made
