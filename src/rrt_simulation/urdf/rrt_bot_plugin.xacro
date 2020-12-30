@@ -8,11 +8,11 @@
     <rightFrontJoint>right_wheel_fhinge</rightFrontJoint>
     <leftRearJoint>left_wheel_hinge</leftRearJoint>
     <rightRearJoint>right_wheel_hinge</rightRearJoint>
-    <wheelSeparation>0.1</wheelSeparation>
+    <wheelSeparation>0.2</wheelSeparation>
     <wheelDiameter>0.2</wheelDiameter>
     <commandTopic>cmd_vel</commandTopic>
     <robotBaseFrame>chassis</robotBaseFrame>
-    <torque>20</torque>
+    <torque>40</torque>
     <odometryTopic>odom</odometryTopic>
     <odometryFrame>odom</odometryFrame>
     <topicName>cmd_vel</topicName>

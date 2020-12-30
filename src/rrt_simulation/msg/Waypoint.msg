@@ -1,2 +1,2 @@
-int32 x_waypoint
-int32 y_waypoint
+float64 x_waypoint
+float64 y_waypoint
