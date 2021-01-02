@@ -2,3 +2,6 @@ build
 devel
 .vscode
 src/rrt_simulation/scripts/test3.py
+src/rrt_simulation/src/test2.cpp
+src/rrt_simulation/src/test.h
+src/rrt_simulation/src/test.cpp
